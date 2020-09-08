@@ -4,7 +4,11 @@ on:
 jobs:
 
   build:
-
+    strategy:
+      fail-fast: false
+      matrix:
+        size: [1, 1024, $((1024*1024))]
+      
     runs-on: ubuntu-latest
 
     env:
@@ -13,4 +17,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ env.IMAGE }} --build-arg SIZE=1
+      run: docker build . --file Dockerfile --tag ${{ env.IMAGE }} --build-arg SIZE=${{ matrix.size }}
