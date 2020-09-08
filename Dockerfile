@@ -1,2 +1,3 @@
 FROM alpine
-RUN dd if=/dev/zero of=file.txt count=1024 bs=1024
+ARG SIZE=1024
+RUN dd if=/dev/zero of=file.txt count=$SIZE bs=1024
