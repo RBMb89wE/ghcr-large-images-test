@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Show some randomness
+      run: head -c 32 </dev/random | xxd -p
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ${{ env.IMAGE }} --build-arg SIZE=${{ matrix.size }}
 
