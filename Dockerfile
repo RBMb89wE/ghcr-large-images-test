@@ -1,5 +1,4 @@
 FROM alpine
 ARG SIZE=1024
-RUN head -c 32 </dev/random | xxd -p
-RUN dd if=/dev/random of=file.txt count=$SIZE bs=1024; ls -l file.txt
-ENTRYPOINT [ "ls", "-l", "file.txt" ]
+RUN head -c $(( ${SIZE}*1024 )) </dev/random > file.bin; ls -l file.bin
+ENTRYPOINT [ "ls", "-l", "file.bin" ]
